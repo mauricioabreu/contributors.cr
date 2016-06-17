@@ -9,10 +9,26 @@ describe Contributors do
 
     it "returns a list of contributors" do
       WebMock.wrap do
-        WebMock.stub(:get, "api.github.com/repos/django/django/contributors").to_return(json)
+        WebMock.stub(:get, "api.github.com/repos/django/django/contributors?page=1&per_page=100").
+          to_return(json)
         expect(contributors.size).to eq(2)
         expect(contributors[0]).to eq("adrianholovaty")
         expect(contributors[1]).to eq("timgraham")
+      end
+    end
+  end
+
+  context "when reading a paginated resource" do
+    subject(response) { Contributors.paginate("foo/bar") }
+    let(foo_json) { Fixture.load("page_1.json") }
+    let(bar_json) { Fixture.load("page_2.json") }
+
+    it "returns all records of every response" do
+      WebMock.wrap do
+        WebMock.stub(:get, "api.github.com/foo/bar?page=1&per_page=100").
+          to_return(foo_json, headers: {"Link": "<https://api.github.com/foo/bar?page=2&per_page=100>; rel=\"next\""})
+        WebMock.stub(:get, "api.github.com/foo/bar?page=2&per_page=100").to_return(bar_json)
+        expect(response.size).to eq(2)
       end
     end
   end

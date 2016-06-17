@@ -3,6 +3,8 @@ require "json"
 
 module Contributors
   module Response
+		PER_PAGE = 100
+
     def get(path : String)
       uri = "#{ENDPOINT}/#{path}"
       response = HTTP::Client.get(
@@ -12,11 +14,21 @@ module Contributors
     end
 
     def get_repo_contributors(repository : String)
-      response = get("repos/#{repository}/contributors")
+      contributors = paginate("repos/#{repository}/contributors")
       result = [] of String
-      contributors = JSON.parse(response.body)
       contributors.each do |contributor|
         result << contributor["login"].as_s
+      end
+			result.sort
+    end
+
+		def paginate(path : String, page = 1, result = [] of JSON::Any)
+      response = get(path + "?page=#{page}&per_page=#{PER_PAGE}")
+      result.concat(JSON.parse(response.body))
+			link = response.headers.fetch("Link", "")
+			if link.includes?("rel=\"next\"")
+        page = page + 1
+        paginate(path, page, result)
       end
       result
     end
