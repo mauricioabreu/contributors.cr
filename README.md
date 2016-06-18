@@ -26,10 +26,10 @@ $ contributors django/django
 
 ## Roadmap
 
-- [] Get all repo contributors
-- [] Get all issue contributors
-- [] Get all pull request contributors
-- [] CLI
+- [ ] Get all repo contributors
+- [ ] Get all issue contributors
+- [ ] Get all pull request contributors
+- [ ] CLI
 
 ## Contributing
 
