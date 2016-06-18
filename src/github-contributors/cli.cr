@@ -2,7 +2,10 @@ require "option_parser"
 
 module Contributors
   class CLI
+    getter repository
+
     def initialize
+      @repository = ARGV.first? || ""
       @verbose = false
       parse
     end
@@ -13,9 +16,7 @@ module Contributors
         parser.on("-h", "--help", "Show this help") { puts parser }
       end
 
-      repository = ARGV.first?
-
-      if !repository
+      if @repository.empty?
         puts "Please provide a repository name like django/django"
         exit
       end
