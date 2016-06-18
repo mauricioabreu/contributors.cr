@@ -19,7 +19,7 @@ describe Contributors do
   end
 
   context "when reading a paginated resource" do
-    subject(response) { Contributors.paginate("foo/bar") }
+    subject(response) { Contributors.paginate(Contributors::Response::Resource.new("foo/bar")) }
     let(foo_json) { Fixture.load("page_1.json") }
     let(bar_json) { Fixture.load("page_2.json") }
 

@@ -14,7 +14,7 @@ module Contributors
     end
 
     def get_repo_contributors(repository : String)
-      contributors = paginate("repos/#{repository}/contributors")
+      contributors = paginate(Resource.new("repos/#{repository}/contributors"))
       result = [] of String
       contributors.each do |contributor|
         result << contributor["login"].as_s
@@ -22,15 +22,37 @@ module Contributors
 			result.sort
     end
 
-		def paginate(path : String, page = 1, result = [] of JSON::Any)
-      response = get(path + "?page=#{page}&per_page=#{PER_PAGE}")
+    def get_issue_contributors(repository : String)
+      contributors = paginate(Resource.new("repos/#{repository}/issues", "state=all"))
+      result = [] of String
+      contributors.each do |contributor|
+        result << contributor["user"]["login"].as_s
+      end
+      result.uniq.sort
+    end
+
+		def paginate(resource, page = 1, result = [] of JSON::Any)
+      path = resource.path + "?page=#{page}&per_page=#{PER_PAGE}"
+      if !resource.query.empty?
+        path = "#{path}&#{resource.query}"
+      end
+      response = get(path)
       result.concat(JSON.parse(response.body))
 			link = response.headers.fetch("Link", "")
 			if link.includes?("rel=\"next\"")
         page = page + 1
-        paginate(path, page, result)
+        paginate(resource, page, result)
       end
       result
+    end
+
+    class Resource
+      getter path, query
+
+      def initialize(path : String, query = "")
+        @path = path
+        @query = query
+      end
     end
   end
 end
