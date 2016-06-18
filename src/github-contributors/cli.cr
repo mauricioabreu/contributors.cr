@@ -1,7 +1,7 @@
 require "option_parser"
 
 module Contributors
-  class Cli
+  class CLI
     def initialize
       @verbose = false
       parse
