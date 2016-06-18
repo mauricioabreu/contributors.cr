@@ -24,6 +24,13 @@ $ contributors django/django
 
 ```
 
+## Roadmap
+
+- [] Get all repo contributors
+- [] Get all issue contributors
+- [] Get all pull request contributors
+- [] CLI
+
 ## Contributing
 
 1. Fork it ( https://github.com/mauricioabreu/github-contributors/fork )
