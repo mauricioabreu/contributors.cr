@@ -9,7 +9,7 @@ Add this to your application's `shard.yml`:
 
 ```yaml
 dependencies:
-  github-contributors:
+  contributors:
     github: mauricioabreu/github-contributors
 ```
 
