@@ -8,7 +8,7 @@ module Contributors
     def get(path : String)
       uri = "#{ENDPOINT}/#{path}"
       response = HTTP::Client.get(
-        uri, headers: HTTP::Headers{"Authorization": "token #{ENV["GITHUB_SECRET"]}"}
+        uri, headers: HTTP::Headers{"Authorization" => "token #{ENV["GITHUB_SECRET"]}"}
       )
       response
     end

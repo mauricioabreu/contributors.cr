@@ -26,7 +26,7 @@ describe Contributors do
     it "returns all records of every response" do
       WebMock.wrap do
         WebMock.stub(:get, "api.github.com/foo/bar?page=1&per_page=100").
-          to_return(foo_json, headers: {"Link": "<https://api.github.com/foo/bar?page=2&per_page=100>; rel=\"next\""})
+          to_return(foo_json, headers: {"Link" => "<https://api.github.com/foo/bar?page=2&per_page=100>; rel=\"next\""})
         WebMock.stub(:get, "api.github.com/foo/bar?page=2&per_page=100").to_return(bar_json)
         expect(response.size).to eq(2)
       end
