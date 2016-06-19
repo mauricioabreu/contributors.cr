@@ -1,4 +1,4 @@
-require "./github-contributors/*"
+require "./contributors/*"
 
 module Contributors
   ENDPOINT = "https://api.github.com"

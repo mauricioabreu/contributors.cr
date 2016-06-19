@@ -1,6 +1,6 @@
 require "spec2"
 require "webmock"
-require "../src/github-contributors"
+require "../src/contributors"
 require "./helpers/*"
 
 include Spec2::GlobalDSL
