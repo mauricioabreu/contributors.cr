@@ -23,6 +23,7 @@ module Contributors
 
       if ENV["GITHUB_SECRET"]?.nil?
         puts "You must set a GITHUB_SECRET environment variable"
+				exit
       end
     end
   end
