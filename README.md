@@ -1,4 +1,4 @@
-# contributors.cr
+# contributors.cr [![Build Status](https://travis-ci.org/mauricioabreu/contributors.cr.svg?branch=master)](https://travis-ci.org/mauricioabreu/contributors.cr)
 
 `Contributors` aims to provide an easy way to collect all contributors of a given project at Github.
 Since Github only lists the top 100 contributors, this project has the goal to show you all people helping your project.
