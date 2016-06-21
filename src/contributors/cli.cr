@@ -16,7 +16,10 @@ module Contributors
         parser.on("-f FILE", "--file FILE", "Output file name") do |file|
           @file = file
         end
-        parser.on("-h", "--help", "Show this help") { puts parser }
+        parser.on("-h", "--help", "Show this help") do
+          puts parser
+          exit 0
+        end
       end
 
       if @repository.empty?
