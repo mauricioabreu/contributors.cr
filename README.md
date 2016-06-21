@@ -18,10 +18,14 @@ dependencies:
 
 Before running the command-line tool, add a `GITHUB_SECRET` to your environment variables.
 
+You also need to compile the project. There is a `Makefile` that makes this task easy.
 
 ```shell
-$ contributors django/django
+make build
+```
 
+```shell
+$ ./contributors "veelenga/awesome-crystal"
 ```
 
 ## Roadmap
