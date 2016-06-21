@@ -3,9 +3,11 @@ require "./contributors/*"
 module Contributors
   ENDPOINT = "https://api.github.com"
 
+  extend Contributors::Report
   extend Contributors::Response
 
   def self.contributors(repository : String)
+    puts "Fetching all contributors of #{repository}. It may take a while..."
     repo_contributors = Contributors.get_repo_contributors(repository)
     issue_contributors = Contributors.get_issue_contributors(repository)
     repo_contributors & issue_contributors
@@ -14,8 +16,6 @@ module Contributors
   def self.run
     options = Contributors::CLI.new
     contributors = Contributors.contributors(options.repository)
-    File.open("contributors.txt", "w") do |f|
-      contributors.each{ |contributor| f.puts(contributor) }
-    end
+    Contributors.generate(contributors, options.file)
   end
 end
