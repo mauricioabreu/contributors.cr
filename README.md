@@ -28,13 +28,6 @@ make build
 $ ./contributors "veelenga/awesome-crystal"
 ```
 
-## Roadmap
-
-- [x] Get all repo contributors
-- [ ] Get all issue contributors
-- [ ] Get all pull request contributors
-- [ ] CLI
-
 ## Contributing
 
 1. Fork it ( https://github.com/mauricioabreu/contributors.cr/fork )
