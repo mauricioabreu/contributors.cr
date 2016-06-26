@@ -10,6 +10,11 @@ module Contributors
       response = HTTP::Client.get(
         uri, headers: HTTP::Headers{"Authorization" => "token #{ENV["GITHUB_SECRET"]}"}
       )
+
+      unless response.success?
+        raise Exceptions::UnsuccessfulResponse.new("Something went wrong when requesting the URL")
+      end
+
       response
     end
 

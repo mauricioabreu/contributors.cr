@@ -43,5 +43,12 @@ describe Contributors do
         expect(response.body).to be_a(String)
       end
     end
+
+    it "raises an exception if response was not succesful" do
+      WebMock.wrap do
+        WebMock.stub(:get, "api.github.com/foo/bar").to_return(status: 404)
+        expect { response }.to raise_error(Contributors::Exceptions::UnsuccessfulResponse)
+      end
+    end
   end
 end
